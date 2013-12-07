@@ -6,6 +6,7 @@ package com.twitter.main;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Enumeration;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -48,14 +49,19 @@ public class MainServlet extends HttpServlet {
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet MainServlet at " + request.getContextPath() + "</h1>");
-
+            Enumeration<String> head = request.getHeaderNames();
+            String temp = head.nextElement();
+            while (temp != null) {
+                out.println(temp);
+                temp = head.nextElement();
+            }
 
             ConfigurationBuilder cb = new ConfigurationBuilder();
             cb.setDebugEnabled(true)
                     .setOAuthConsumerKey("uGMLFUw9iVBQd9QnoIQYQ")
                     .setOAuthConsumerSecret("70RTdEimZyf6ja4O941Vfr3oGmOZdqlko4gZSz4nEUY")
-                    .setOAuthAccessToken("https://api.twitter.com/oauth/request_token")
-                    .setOAuthAccessTokenSecret("https://api.twitter.com/oauth/authorize");
+                    .setOAuthAccessToken("137978001-FRETKcfUZkIgpzpAvQypKNY4zl13cguIE4WgXDa1")
+                    .setOAuthAccessTokenSecret("HD6IOZIjPNK5sr2gHS9qs5caBJHvaq50FPXk3iR9bRiXO");
             TwitterFactory tf = new TwitterFactory(cb.build());
 //        Twitter twitter = tf.getInstance();
 //        	https://api.twitter.com/oauth/access_token
@@ -66,10 +72,12 @@ public class MainServlet extends HttpServlet {
 //            RequestToken requestToken = (RequestToken) request.getSession().getAttribute("requestToken");
 //            String verifier = request.getParameter("oauth_verifier");
             try {
+
                 twitter = tf.getInstance();
+                System.out.println("play");
 
                 twitter.updateStatus("wawawawawa... authentic");
-
+                System.out.println("left");
                 User user = twitter.verifyCredentials();
 
                 List<Status> statuses = twitter.getHomeTimeline();
