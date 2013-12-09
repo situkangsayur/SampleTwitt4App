@@ -76,7 +76,7 @@ public class MainServlet extends HttpServlet {
                 twitter = tf.getInstance();
                 System.out.println("play");
 
-                twitter.updateStatus("wawawawawa... authentic");
+//                twitter.updateStatus("wawawawawa... authentic");
                 System.out.println("left");
                 User user = twitter.verifyCredentials();
 
